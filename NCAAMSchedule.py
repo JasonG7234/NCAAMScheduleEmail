@@ -60,10 +60,10 @@ def setMessageElements(games):
 		
 		
 def sendEmail(data):
-	FROMADDR = "variousemaillists@gmail.com"
+	FROMADDR = #Your sending email address in quotes
 	LOGIN    = FROMADDR
-	PASSWORD = "SuperSecretPassword!1996"
-	TOADDRS  = ["JasonG7234@gmail.com", "r.torino97@gmail.com"]
+	PASSWORD = #Your password in quotes
+	TOADDRS  = #List of all emails receiving the message, in list
 	SUBJECT  = "NCAAM Daily Schedule"
 
 	msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n"
