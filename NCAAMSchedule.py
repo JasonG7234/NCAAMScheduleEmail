@@ -1,10 +1,15 @@
 import requests
+import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from bs4 import BeautifulSoup
 import parsedatetime as pdt
 
+def getURL():
+    date = datetime.datetime.today().strftime('%Y%m%d')
+    return 'http://www.espn.com/mens-college-basketball/schedule/_/date/' + str(date) + '/group/50'
+    
 def getTime(column):
 	time = str(column)[52:-148] #Get the time from the HTML code, formatted incorrectly
 	hour = int(time[:-3]) - 5 #Return the hour of the time to be fixed
@@ -60,10 +65,10 @@ def setMessageElements(games):
 		
 		
 def sendEmail(data):
-	FROMADDR = #Your sending email address in quotes
+	FROMADDR = #Your sending email in quotes
 	LOGIN    = FROMADDR
 	PASSWORD = #Your password in quotes
-	TOADDRS  = #List of all emails receiving the message, in list
+	TOADDRS  = #Your receiving email(s) in list format
 	SUBJECT  = "NCAAM Daily Schedule"
 
 	msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n"
@@ -79,10 +84,7 @@ def sendEmail(data):
 	server.sendmail(FROMADDR, TOADDRS, msg)
 	server.quit()
 
-
-url = 'http://www.espn.com/mens-college-basketball/schedule'
-#url = 'http://www.espn.com/mens-college-basketball/schedule/_/date/20180306/group/50'
-#Used solely for testing purposes ^
+url = getURL()
 response = requests.get(url)
 html = response.content
 
@@ -107,5 +109,5 @@ for row in table.findAll('tr'):
 	columnNum = 0
 
 #printGames(list_of_rows)
+# ^ Used solely for testing purposes
 sendEmail(list_of_rows)
-
