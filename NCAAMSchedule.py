@@ -15,8 +15,10 @@ def getTime(column):
 	hour = int(time[:-3]) - 5 #Return the hour of the time to be fixed
 	if (hour < 0):
 		hour = hour + 24
-	if (hour >= 12):
+	if (hour > 12):
 		hour = hour - 12
+		time = str(hour) + time[-3:] + " PM"
+	elif (hour == 12):
 		time = str(hour) + time[-3:] + " PM"
 	else:
 		time = str(hour) + time[-3:] + " AM"
@@ -32,6 +34,8 @@ def getNetwork(column):
 		network = network.split("alt=",1)[1]
 		if (network[5] == '3'): #ESPN3 has different tag documentation
 			network = network[1:-97]
+		elif (network[5] == 'N'): #ESPNNews has different tag documentation
+			network = network[1:-391]
 		elif (network[5] == '"'): #ESPN & SECN have only 4 letters
 			network = network[1:-389] 
 		else: #ESPN2 & ESPNU
@@ -40,6 +44,7 @@ def getNetwork(column):
 
 def getTeamName(column):
 	text = column.text.replace('&nbsp;', '')
+	text = text.replace(';', '')
 	text = text.rsplit(' ', 1)[0]
 	return text
 	
@@ -65,10 +70,10 @@ def setMessageElements(games):
 		
 		
 def sendEmail(data):
-	FROMADDR = #Your sending email in quotes
+	FROMADDR = #YOUR SENDING EMAIL
 	LOGIN    = FROMADDR
-	PASSWORD = #Your password in quotes
-	TOADDRS  = #Your receiving email(s) in list format
+	PASSWORD = #YOUR SENDING EMAIL PASSWORD
+	TOADDRS  = #YOUR RECEIVING EMAILS IN LIST FORMAT
 	SUBJECT  = "NCAAM Daily Schedule"
 
 	msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n"
