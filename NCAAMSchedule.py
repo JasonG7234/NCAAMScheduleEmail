@@ -113,6 +113,9 @@ for row in table.findAll('tr'):
 	list_of_rows.append(list_of_cells)
 	columnNum = 0
 
+if (str(list_of_rows[0]) != '[\'No games\']'):
+	sendEmail(list_of_rows)
+	
 #printGames(list_of_rows)
 # ^ Used solely for testing purposes
-sendEmail(list_of_rows)
+
