@@ -12,7 +12,7 @@ def getURL():
     
 def getTime(column):
 	time = str(column)[52:-148] #Get the time from the HTML code, formatted incorrectly
-	hour = int(time[:-3]) - 5 #Return the hour of the time to be fixed
+	hour = int(time[:-3]) - 4 #CHANGE TO - 5 WHEN DAYLIGHT SAVINGS TIME SWITCHES
 	if (hour < 0):
 		hour = hour + 24
 	if (hour > 12):
