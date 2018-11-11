@@ -23,20 +23,11 @@ def getTime(column):
 #Returns the network the game can be found on
 #This is done be returning the alt tag on all of the images
 def getNetwork(column):
-	network = str(column.contents)[1:-1]
-	if (len(network) == 0): #The game isn't being streamed live
-		return "N/A"
-	elif (len(network) >= 4 and len(network) <= 8): #The network is listed in plain text and not an image
-		return network[1:-1]
+	columnIMG = column.find('img')
+	if (not columnIMG):
+		return column.text
 	else:
-		network = network.split("alt=",1)[1]
-		if (network[5] == '3'): #ESPN3 has different tag documentation
-			network = network[1:-97]
-		elif (network[5] == '"'): #ESPN & SECN have only 4 letters
-			network = network[1:-389] 
-		else: #ESPN2 & ESPNU
-			network = network[1:-388]
-		return network
+		return columnIMG.get('alt')
 
 #Used for testing purposes
 def printGames(games):
@@ -60,9 +51,9 @@ def setMessageElements(content):
 		
 def sendEmail(data):
 	SUBJECT = "NCAAM Daily Schedule"
-	FROMADDR = #YOUR SENDING EMAIL
-	FROMPASSWORD = #YOUR SENDING EMAIL PASSWORD
-	TOADDR = #YOUR RECEIVING EMAILS IN LIST FORMAT
+	FROMADDR = "variousemaillists@gmail.com"
+	FROMPASSWORD = "SuperSecretPassword!1996"#YOUR SENDING EMAIL PASSWORD
+	TOADDR = ["JasonG7234@gmail.com", "tjgomes@aol.com"]#YOUR RECEIVING EMAILS IN LIST FORMAT
 	
 	MESSAGE = MIMEMultipart('alternative')
 	MESSAGE['subject'] = SUBJECT
@@ -84,7 +75,7 @@ def sendEmail(data):
 		
 	server.quit()
 
-url = 'http://www.espn.com/mens-college-basketball/schedule'
+url = 'http://www.espn.com/mens-college-basketball/schedule/'
 response = requests.get(url)
 html = response.content
 
@@ -104,7 +95,7 @@ for row in table.findAll('tr'):
 			text = getNetwork(column)
 		else:
 			text = column.text.replace('&nbsp;', '')
-		list_of_cells.append(text)
+		list_of_cells.append(text.encode('ascii'))
 	list_of_rows.append(list_of_cells)
 	count = 0
 
