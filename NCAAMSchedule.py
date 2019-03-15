@@ -12,16 +12,18 @@ import datetime
 #The file 
 def getTime(column):
 	time = str(column)[52:-148]
-	hour = int(time[:-3]) - 4
-	if (hour < 0):
-		hour = hour + 24
-	if (hour > 12):
-		hour = hour - 12
-		time = str(hour) + time[-3:] + " PM"
-	elif (hour == 12):
-	  time = str(hour) + time[-3:] + " PM"
-	else:
-		time = str(hour) + time[-3:] + " AM"
+	#If ran when game is ON time will appear as blank
+	if (time is not ''):
+		hour = int(time[:-3]) - 4
+		if (hour < 0):
+			hour = hour + 24
+		if (hour > 12):
+			hour = hour - 12
+			time = str(hour) + time[-3:] + " PM"
+		elif (hour == 12): #For DST - rmemove this elif in October and get change line 18 to -5
+			time = str(hour) + time[-3:] + " PM"
+		else:
+			time = str(hour) + time[-3:] + " AM"
 	return time
 
 #Returns the network the game can be found on
@@ -54,10 +56,10 @@ def setMessageElements(content):
 	return message.format("".join(subitems))
 		
 def sendEmail(data):
-	SUBJECT = "NCAAM Daily Schedule"
-	FROMADDR = #YOUR SENDING EMAIL ADDRESS
-	FROMPASSWORD = #YOUR SENDING EMAIL PASSWORD
-  TOADDR = #YOUR RECEIVING EMAILS IN LIST FORMAT
+	SUBJECT = "NCAAM Daily Schedule "
+	FROMADDR = # YOUR SENDING EMAIL ADDRESS
+	FROMPASSWORD = # YOUR SENDING PASSWORD 
+	TOADDR = # YOUR ADDRESSES TO EMAIL TO IN LIST FORMAT
 	
 	MESSAGE = MIMEMultipart('alternative')
 	MESSAGE['subject'] = SUBJECT
@@ -80,7 +82,6 @@ def sendEmail(data):
 	server.quit()
 
 url = 'http://www.espn.com/mens-college-basketball/schedule/_/date/' + datetime.datetime.today().strftime('%Y%m%d') + '/group/50'
-print(url)
 response = requests.get(url)
 html = response.content
 
@@ -100,7 +101,7 @@ for row in table.findAll('tr'):
 			text = getNetwork(column)
 		else:
 			text = column.text.replace('&nbsp;', '')
-		list_of_cells.append(unidecode.unidecode(text).encode('ascii'))
+		list_of_cells.append(unidecode.unidecode(text))
 	list_of_rows.append(list_of_cells)
 	count = 0
 
