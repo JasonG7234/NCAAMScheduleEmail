@@ -10,15 +10,15 @@ Bug fix for when Scheduler runs when game is currently going on. Previously, the
 ### FAQ
 > How can I get added to the list?
 If you want to be added to the email list rather than creating one for yourself there are two options.
-1. You can email me at[mailto:JasonG7234@gmail.com](JasonG7234@gmail.com)
-2. You can just clone/commit the branch. Leave your email in the documentation and I can add you. Check the details [https://stackoverflow.com/questions/12686545/how-to-leave-a-message-for-a-github-com-user](here) for more information. 
+1. You can email me at[JasonG7234@gmail.com](mailto:JasonG7234@gmail.com).
+2. You can just clone/commit the branch. Leave your email in the documentation and I can add you. Check the details [here](https://stackoverflow.com/questions/12686545/how-to-leave-a-message-for-a-github-com-user) for more information. 
 Hopefully down the line I can link to a Google Form to be filled out. 
 
 > Can I help with the project?
 Of course! I can always use help. Probably best bet is to reach me by email, but pull requests work too. 
 
 > This is the greatest project ever where can I learn more about you/hire you/pay you obscene amounts of money?
-Wow I really appreciate the kind words! You can find out more about me on my website [http://jasongomes.me](here) and my Venmo is @Jason-Gomes ;-)
+Wow I really appreciate the kind words! You can find out more about me on my website [here](http://jasongomes.me) and my Venmo is @Jason-Gomes ;-)
 
 ### To Do: 
  - Ideally, I update this project before the end of the season with the Flask framework, so that I can make the plain text emails look nice and more easily readable. 
