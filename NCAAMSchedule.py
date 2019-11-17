@@ -82,7 +82,7 @@ def sendEmail(data):
 		MESSAGE['To'] = email
 		server.sendmail(FROMADDR, [email], MESSAGE.as_string())
 		
-	#server.quit()
+	server.quit()
 
 url = 'http://www.espn.com/mens-college-basketball/schedule/_/date/' + datetime.datetime.today().strftime('%Y%m%d') + '/group/50'
 response = requests.get(url)
