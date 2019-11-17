@@ -16,15 +16,13 @@ def getTime(column):
 	time = str(column)[52:-148]
 	#If ran when game is ON time will appear as blank
 	if (time != ''):
-		hour = int(time[:-3]) - 4
+		hour = int(time[:-3]) - 5
 		if (hour < 0):
 			hour = hour + 24
 		if (hour > 12):
 			hour = hour - 12
 			time = str(hour) + time[-3:] + " PM"
-		elif (hour == 12): #For DST - rmemove this elif in October and get change line 18 to -5
-			time = str(hour) + time[-3:] + " PM"
-		else:
+		else: #For DST - add an elif above this that says if hour == 12 then time = str(hour) + time[-3:] + " PM" and change hour to - 4 not 5
 			time = str(hour) + time[-3:] + " AM"
 	return time
 
@@ -103,12 +101,12 @@ for row in table.findAll('tr'):
 			text = getNetwork(column)
 		else: #team name
 			text = column.text.replace('&nbsp;', '')
-			print(text.rsplit(' ', 1)[0])
+			text = text.rsplit(' ', 1)[0]
 		list_of_cells.append(unidecode.unidecode(text))
 	list_of_rows.append(list_of_cells)
 	count = 0
 
-#printGames(list_of_rows)
+printGames(list_of_rows)
 #sendEmail(list_of_rows)
 
 
