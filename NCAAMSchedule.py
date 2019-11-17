@@ -7,13 +7,15 @@ import parsedatetime as pdt
 import unidecode
 import datetime
 
+dict = {'JasonG7234@gmail.com':['Rutgers', 'Seton Hall', 'Duke'], 'tjgomes@aol.com':['Rutgers', 'Seton Hall']}
+
 #Returns the time that game goes on
 #This is done by interpreting the HTML code of the date_time
 #The file 
 def getTime(column):
 	time = str(column)[52:-148]
 	#If ran when game is ON time will appear as blank
-	if (time is not ''):
+	if (time != ''):
 		hour = int(time[:-3]) - 4
 		if (hour < 0):
 			hour = hour + 24
@@ -56,10 +58,10 @@ def setMessageElements(content):
 	return message.format("".join(subitems))
 		
 def sendEmail(data):
-	SUBJECT = "NCAAM Daily Schedule "
-	FROMADDR = # YOUR SENDING EMAIL ADDRESS
-	FROMPASSWORD = # YOUR SENDING PASSWORD 
-	TOADDR = # YOUR ADDRESSES TO EMAIL TO IN LIST FORMAT
+	SUBJECT = "NCAAM Daily Schedule"
+	FROMADDR = "variousemaillists@gmail.com"
+	FROMPASSWORD = "SuperSecretPassword!1996" 
+	TOADDR = list(dict.keys())
 	
 	MESSAGE = MIMEMultipart('alternative')
 	MESSAGE['subject'] = SUBJECT
@@ -99,13 +101,14 @@ for row in table.findAll('tr'):
 			text = getTime(column)
 		elif count == 4:
 			text = getNetwork(column)
-		else:
+		else: #team name
 			text = column.text.replace('&nbsp;', '')
+			print(text.rsplit(' ', 1)[0])
 		list_of_cells.append(unidecode.unidecode(text))
 	list_of_rows.append(list_of_cells)
 	count = 0
 
 #printGames(list_of_rows)
-sendEmail(list_of_rows)
+#sendEmail(list_of_rows)
 
 
