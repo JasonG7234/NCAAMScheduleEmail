@@ -27,6 +27,8 @@ def getTime(column):
 			time = str(hour) + time[-3:] + " PM"
 		else:
 			time = str(hour) + time[-3:] + " AM"
+	else:
+		time = 'LIVE'
 	return time
 
 #Returns the network the game can be found on
@@ -109,7 +111,7 @@ for row in table.findAll('tr'):
 	list_of_rows.append(list_of_cells)
 	count = 0
 
-#printGames(list_of_rows)
-sendEmail(list_of_rows)
+printGames(list_of_rows)
+#sendEmail(list_of_rows)
 
 
