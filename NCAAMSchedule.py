@@ -16,13 +16,16 @@ def getTime(column):
 	time = str(column)[52:-148]
 	#If ran when game is ON time will appear as blank
 	if (time != ''):
-		hour = int(time[:-3]) - 5
-		if (hour < 0):
+		hour = int(time[:-3]) - 5 #If DST change this to 4
+		if (hour < 0): #Normalize hour to 24 hour clock
 			hour = hour + 24
-		if (hour > 12):
+
+		if (hour > 12): # Now parse time
 			hour = hour - 12
 			time = str(hour) + time[-3:] + " PM"
-		else: #For DST - add an elif above this that says if hour == 12 then time = str(hour) + time[-3:] + " PM" and change hour to - 4 not 5
+		elif (hour == 12):
+			time = str(hour) + time[-3:] + " PM"
+		else:
 			time = str(hour) + time[-3:] + " AM"
 	return time
 
@@ -79,7 +82,7 @@ def sendEmail(data):
 		MESSAGE['To'] = email
 		server.sendmail(FROMADDR, [email], MESSAGE.as_string())
 		
-	server.quit()
+	#server.quit()
 
 url = 'http://www.espn.com/mens-college-basketball/schedule/_/date/' + datetime.datetime.today().strftime('%Y%m%d') + '/group/50'
 response = requests.get(url)
@@ -106,7 +109,7 @@ for row in table.findAll('tr'):
 	list_of_rows.append(list_of_cells)
 	count = 0
 
-printGames(list_of_rows)
-#sendEmail(list_of_rows)
+#printGames(list_of_rows)
+sendEmail(list_of_rows)
 
 
