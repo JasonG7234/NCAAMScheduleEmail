@@ -2,7 +2,7 @@
 ## Python file that scrapes ESPN's college basketball schedule page. 
 
 ### Description
-Utilizes BeautifulSoup to scrape thee ESPN college basketball schedule page, organizes it into an HTML table, and sends it via smtplib. 
+Utilizes BeautifulSoup to scrape the ESPN college basketball schedule page, organizes it into an HTML table, and sends it via smtplib. 
 
 ### Latest Commit
 Bug fix for when Scheduler runs when game is currently going on. Previously, the file would not be able to read the LIVE score because it was looking for a numeric value. 
