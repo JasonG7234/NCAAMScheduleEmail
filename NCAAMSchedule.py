@@ -63,7 +63,7 @@ def setMessageElements(content):
 def sendEmail(data):
 	SUBJECT = "NCAAM Daily Schedule"
 	FROMADDR = "variousemaillists@gmail.com"
-	FROMPASSWORD = "SuperSecretPassword!1996" 
+	FROMPASSWORD = "*************" 
 	TOADDR = list(dict.keys())
 	
 	MESSAGE = MIMEMultipart('alternative')
