@@ -7,7 +7,7 @@ import parsedatetime as pdt
 import unidecode
 import datetime
 
-dict = {'JasonG7234@gmail.com':['Rutgers', 'Seton Hall', 'Duke'], 'tjgomes@aol.com':['Rutgers', 'Seton Hall']}
+to_addrs = {'JasonG7234@gmail.com':['Rutgers', 'Seton Hall', 'Duke'], 'tjgomes@aol.com':['Rutgers', 'Seton Hall']}
 
 #Returns the time that game goes on
 #This is done by interpreting the HTML code of the date_time
@@ -64,7 +64,7 @@ def sendEmail(data):
 	SUBJECT = "NCAAM Daily Schedule"
 	FROMADDR = "variousemaillists@gmail.com"
 	FROMPASSWORD = "*************" 
-	TOADDR = list(dict.keys())
+	TOADDR = list(to_addrs.keys())
 	
 	MESSAGE = MIMEMultipart('alternative')
 	MESSAGE['subject'] = SUBJECT
